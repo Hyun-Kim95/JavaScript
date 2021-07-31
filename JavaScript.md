@@ -90,5 +90,179 @@
 * 변수에 적용할 수 있는 연산자
 
   * 복합 대입 연산자
+    * a += 100
   * 증감 연산자
+    * a++
 
+* undefined 자료형
+  * 상수와 변수로 선언하지 않은 식별자
+    * a의 선언 없이 typeof(a)
+  * 값이 없는 변수
+    * let b 후에 값 대입 없이 typeof(b)
+* 문자열 입력: prompt()
+  * prompt("메시지", "디폴트 값")
+  * 이런 식의 창이 뜨고 확인을 누르면 콘솔에서 적어준 값을 확인 가능
+  * ![prompt](https://user-images.githubusercontent.com/75933619/127536715-eb796945-5f39-4265-9afc-0cc5dc7a85f7.png)
+  * 문자열로 리턴
+* 불 입력: confirm()
+  * const b = confirm("메시지")
+  * 메시지 라고 적힌 창이 뜨고 확인을 누르면 true를 취소를 누르면 false를 리턴
+
+* 자료형 변환
+
+  * Number(): 숫자로 변환
+    * 숫자로 변환이 안되는 것에 사용하면 NaN : Not a Number
+    * typeof(NaN) = "number"
+  * String(): 문자열로 변환
+  * Boolean(): 불로 변환
+    * String(true) -> "true"
+    * String(false) -> "false"
+    * Number(true) -> 1
+    * Number(false) -> 0
+    * 다른 자료형 -> 불
+      * false
+        * 0, NaN, "", null, undefined
+      * true
+        * 나머지 전부
+
+  * 예제
+
+    ```javascript
+    <script>
+      let a = prompt('첫 번째 숫자를 입력해 주세요.')	// const로하면 오류
+      a = Number(a)									// 상수에 값을 또 할당하면 오류라서
+    
+      const b = Number(prompt('두 번째 숫자를 입력해 주세요.'))	// 이렇게 한번에 하면
+      														// const로 선언 가능
+      alert(`${a} + ${b} = ${a+b}`)
+    </script>
+    ```
+
+* if 조건문
+
+  ```javascript
+  <script>
+    const date = new Date()	// 현재 날짜 관련 객체
+    const hours = date.getHours()	// 현시 시간을 구함
+    // const month = (new Date()).getMonth() + 1
+    // 위처럼 구할 수도 있음(월은 0~11로 나와서 +1을 적어줌)
+    if(hours < 10){
+      alert('아침밥 먹을 시간입니다')
+    } else if(hours < 16){
+      alert('점심밥 먹을 시간입니다')
+    } else{
+      alert('저녁밥 먹을 시간입니다')
+    }
+  </script>
+  ```
+
+* switch 조건문
+
+  ```javascript
+  <script>
+    const x = Number(prompt('숫자를 입력해 주세요',''))
+    switch(x){
+      case 1:
+        alert('입력한 값이 1입니다')
+        break
+      case 2:
+        alert('입력한 값이 2입니다')
+        break
+      case 3:
+        alert('입력한 값이 3입니다')
+        break
+      default:
+        alert('입력한 값이 1~3이 아닙입니다')
+    }
+  </script>
+  ```
+
+* 조건부 연산자(삼항 연산자)
+
+  ```javascript
+  <script>
+    const x = Number(prompt('숫자를 입력해주세요',''))
+    alert((x>=0)?'0 이상의 숫자입니다':'0보다 작은 숫자입니다')
+  </script>
+  ```
+
+* 짧은 조건문(short circuit evaluation(단락 평가))
+
+  * 많이 안씀
+
+    ```javascript
+    <script>
+      alert('시작')
+      true || alert('또는 연산자')	// 앞에 꺼 확인해서 true 면 뒤에꺼 확인 안함
+    
+      false && alert('그리고 연산자')
+      alert('종료')
+    </script>
+    // 시작
+    // 종료
+    ```
+
+* 예제 문제
+
+  ```javascript
+  <script>
+    const rawInput = Number(prompt('태어난 해를 입력해주세요.',''))
+    const year = Number(rawInput)
+  
+    let result1
+    const e1 = year % 12
+    if      (e1 === 0)  {result1 = '신'}
+    else if (e1 === 1)  {result1 = '유'}
+    else if (e1 === 2)  {result1 = '술'}
+    else if (e1 === 3)  {result1 = '해'}
+    else if (e1 === 4)  {result1 = '자'}
+    else if (e1 === 5)  {result1 = '축'}
+    else if (e1 === 6)  {result1 = '인'}
+    else if (e1 === 7)  {result1 = '묘'}
+    else if (e1 === 8)  {result1 = '진'}
+    else if (e1 === 9)  {result1 = '사'}
+    else if (e1 === 10)  {result1 = '오'}
+    else if (e1 === 11)  {result1 = '미'}
+  
+    let result2
+    const e2 = year % 10
+    if      (e2 === 0)  {result2 = '경'}
+    else if (e2 === 1)  {result2 = '신'}
+    else if (e2 === 2)  {result2 = '임'}
+    else if (e2 === 3)  {result2 = '계'}
+    else if (e2 === 4)  {result2 = '갑'}
+    else if (e2 === 5)  {result2 = '을'}
+    else if (e2 === 6)  {result2 = '병'}
+    else if (e2 === 7)  {result2 = '정'}
+    else if (e2 === 8)  {result2 = '무'}
+    else if (e2 === 9)  {result2 = '기'}
+  
+    alert(`${year}년은 ${result1}${result2}입니다.`)
+  </script>
+  ```
+
+  * 짧은 코딩
+
+  ```javascript
+  <script>
+    const 입력 = Number(prompt('태어난 해를 입력해주세요.','')) % 12
+    const tti = '원숭이,닭,개,돼지,쥐,소,호랑이,토끼,용,뱀,말,양'.split(',')
+    alert(`${tti[입력]}띠 입니다.`)
+  </script>
+  ```
+
+* 배열
+
+  * 생성 방법
+    * const a = ['여러가지', 10, true, 1]
+  * 메서드
+    * push(요소): 배열 뒤에 요소 추가
+      * a.push(100)
+    * splice(인덱스, 0, 요소): 배열 중간에 요소 추가
+      * a.splice(1, 0, '추가'): 1번 인덱스에 '추가'라는 요소를 추가
+    * splice(인덱스, 1): 인덱스로 배열의 요소 제거
+      * a.splice(0, 1): 0번 인덱스 삭제
+    * indexof(요소): 배열 내부에서 값의 위치 찾기
+      * a.indexof('안녕'): 있으면 위치 반환, 없으면 -1 반환
+    * indexof() + splice() 활용: 값으로 배열의 요소 제거
+      * a.splice(a.indexOf('안녕'), 1)
