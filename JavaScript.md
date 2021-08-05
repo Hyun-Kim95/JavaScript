@@ -417,4 +417,57 @@
       console.log(`배열의 최대값은 ${max(a)}`)
       ```
 
-      
+* API
+
+  * Application Programming Interface
+    * 애플리케이션 프로그램을 만들 때의 약속
+
+* 나머지 매개변수
+
+  ```javascript
+  const 함수 = function(a,b,...매개변수){
+      console.log(a,b,매개변수)
+  }
+  
+  함수()
+  함수(1)
+  함수(1,2)
+  함수(1,2,3)
+  함수(1,2,3,4)	// 이렇게 사용하는 매개변수
+  ```
+
+  * 일반 매개변수와 같이 사용할 수 있음
+  * 무조건 가장 뒤쪽에 나와야함
+  * 나머지 매개변수는 배열로 들어감
+  * 일반 매개변수와 같이 사용하는데 그 갯수를 못맞추면 undefind 나옴
+
+* 전개 연산자: 함수 호출
+
+  ```javascript
+  const 함수 = function(a,b,c){
+      console.log(a,b,c)
+  }
+  
+  const a = [1,2,3]
+  함수(a[0],a[1],a[2])
+  함수(...a)	// 위 아래는 완전히 같은 코드
+  ```
+
+* 가독성의 중요성
+
+  * 기업 입장의 비용 절감
+  * 프로그램이 너무 복잡해져서
+  * 지원 도구의 활용
+
+* 기본 매개변수
+
+  ```javascript
+  const isLeapYear = function(연도 = new Date().getFullYear()){	// 기본 매개변수
+      console.log(`연도: ${연도}`)
+      return (연도 % 4 === 0) && (연도 % 100 !== 0) || (연도 % 400 === 0)
+  }
+  
+  console.log(isLeapYear())	// 매개변수를 안주면 올해가 윤년인지 확인 가능
+  ```
+
+  
