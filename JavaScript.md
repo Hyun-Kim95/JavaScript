@@ -470,4 +470,114 @@
   console.log(isLeapYear())	// 매개변수를 안주면 올해가 윤년인지 확인 가능
   ```
 
-  
+* 콜백함수
+
+  * 함수내부에서 함수 호출
+
+  * forEach
+
+    ```javascript
+    const 배열 = [273,52,103,32,57]
+    배열.forEach(function(value,index,array){
+        consol.log(value,index,array)
+    })
+    // 배열의 값이 하나씩 함수로 들어감(array는 생략 가능(잘 안씀))
+    ```
+
+  * filter
+
+    ```javascript
+    let 배열 = [273,52,103,32,57]
+    배열 = 배열.filter(function (value,index){	// 비파괴적 함수라서
+        return value % 2 === 0	// true , false
+    })
+    console.log(배열)
+    ```
+
+  * map
+
+    ```javascript
+    let 배열 = [273,52,103,32,57]
+    배열 = 배열.map(function (value,index){	// 새로운 배열을 만듬
+        return value + "!!"	
+    })
+    console.log(배열)
+    ```
+
+  * 화살표 함수
+
+    * (매개변수) => {본문}
+    * 함수가 리턴 하나뿐인 함수이면 return 과 중괄호도 생략 가능
+
+    ```javascript
+    let 배열 = [273,52,103,32,57]
+    배열 = 배열.map((value,index) => value + "!!")
+    console.log(배열)
+    ```
+
+* 타이머 함수
+
+  * setTimeout()
+
+    * 일정 시간 후에 실행
+
+      ```javascript
+      setTimeout(function(){
+          console.log('setTimeout 함수 입니다!')
+      },1000)	// 1초 후에 함수 실행
+      ```
+
+  * setInterval()
+
+    * 일정 시간마다 실행
+
+      ```javascript
+      setInterval(function(){
+          console.log('setInterval 함수 입니다!')
+      },1000)
+      ```
+
+  * clearTimeout(), clearInterval()
+
+    * 타이머 함수의 취소
+
+      ```javascript
+      const a = setTimeout(function(){
+          console.log('setTimeout 함수 입니다!')
+      },1000)
+      
+      clearTimeout(a)
+      ```
+
+* 즉시 호출 함수
+
+  * 함수를 만들자마자 호출
+
+  * 상수명 변수명 등의 중복 가능성을 없애줌
+
+    ```javascript
+    (function(){
+        
+    })()
+    ```
+
+* 엄격모드
+
+  * 명확하게 선언해야 실행되도록 제한하는 기능
+
+    ```html
+    <script>
+    	'use strict'	// 이걸 처음에 적어주면 됨
+        a = 10			// 원래라면 오류없이 실행됨
+        b = 20			// 엄격모드를 이용하면 오류 발생시켜서 const나 let을 붙혀야 실행됨
+        console.log(a,b)
+    </script>
+    <script>
+    	(function(){		// 다른 스크립트부분에 영향을 미치면 문제 발생 가능성이 있어서
+            'use strict'	// 이렇게 즉시호출 함수 내부에서만 엄격모드를 사용하도록 많이 씀
+            
+        })()
+    </script>
+    ```
+
+    
