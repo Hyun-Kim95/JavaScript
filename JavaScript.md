@@ -580,4 +580,28 @@
     </script>
     ```
 
+* 객체
+
+  * 키와 값을 가짐
+
+    ```javascript
+    const dog = {			 // 객체
+          name: '구름',		// 키: name, 값: '구름'
+          age: 7,
+          bark: function () { // 함수도 속성으로 들어올 수 있음(객체안에 있는 함수 -> 메서드)
+            console.log(`${dog.name}이/가 짖습니다!`)
+            console.log(`${this.name}이/가 짖습니다!`)	// this 자기자신을 가리킴
+          },
+          sleep: () => {
+            console.log(`${dog.name}이/가 잡니다!`)	// 화살표함수는 this 사용불가
+          }
+        }
+    dog.bark()
+    dog.sleep()
+    console.log(dog.name)	// 이런식으로 접근 가능
+    console.log(dog['name'])
+    dog.name = '별'			// 변경 가능
+    ```
+
     
+
