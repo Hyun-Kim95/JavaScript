@@ -644,7 +644,7 @@ console.log(배열)
   * 함수는 그냥 함수라고 나옴
   * typeof(b) === 'function' -> true
 
-### 함수를 객체처럼 사용할 때 그 함수는 일급 객체(first-class object)라고 함
+#### 함수를 객체처럼 사용할 때 그 함수는 일급 객체(first-class object)라고 함
 
 ### 여러가지 메서드
 
@@ -671,3 +671,180 @@ console.log(배열)
   * 여러가지 많음
   * Math.floor(Math.random() * 50)
     * 0~1 사이의 랜덤에 50을 곱하고 소수점 밑을 버려서 랜덤 정수를 만듬
+
+### 외부 스크립트 파일 읽어들이기
+
+* html 해드 부분에 <script\>내용</script\> 이렇게 하지 않고 js파일을 만들어서 거기에 코딩한 후
+
+  <script src="b.js"\></script\> 이런 식으로 사용 가능
+
+### Lodash 라이브러리
+
+* https://lodash.com
+* 유용한 함수가 많으므로 심심할 때 읽어보기
+* 다운로드 부분에 파일을 다운 받아서 쓰거나 링크를 복사해서 사용 가능(둘 중 아무거나 해도 됨)
+* 다운로드
+  * Full build 클릭
+  * 나온 화면에서 우 클릭 다른 이름으로 저장 선택
+  * 사용할 폴더에 저장
+
+* 링크 복사
+  * CDN copies 클릭
+    * CDN : 콘텐츠 전송 네트워크라는 의미
+  * 중간 lodash 오른쪽에 Copy to Clipboard 클릭 후 Copy URL 선택
+  * 복사된 링크를 스크립트의 src 부분에 넣어주면 사용 가능
+
+* 사용법은 위쪽 Documentation 클릭하면 나옴
+  * _.sortBy() : 정렬해줌
+    * const output = _.sortBy(books, ['publisher','price'])
+      * books 를 publisher를 기준으로 정렬한 후 price를 기준으로 정렬(하나만 써도 됨)
+
+### 여러가지 라이브러리
+
+* Luxon : 시간 관련
+* Handsontable : 엑셀과 같은 스프레드시트를 만듬
+* D3.js : 데이터 시각화
+
+* Chart.js : 간단한 그래프 출력
+* three.js : 3D 그래픽 다루기
+
+### 객체의 기본 속성
+
+```javascript
+const test = function(object){
+    return `${object.name} : ${object.age} : ${object.color} : ${object.status}`
+}
+console.log(test{
+            name: '구름',
+            age: 7,
+            color: '갈색'
+            })
+```
+
+* 위 상태에서 기본 매개변수 지정 방법
+
+  * 과거(~ing)
+
+    * object.status = object.status !== undefinde ? object.status : '이상 없음'
+    * object.status = object.status ? object.status : '이상 없음'
+    * object.status = object.status || '이상 없음'
+
+  * 현대
+
+    * object = { status: '이상 없음', ...object }
+
+    * fun = function({name, age, color, status = '이상 없음'}) {
+
+      ​	return \`${name} : ${age} : ${color} : ${status} `
+
+      }
+
+      밑에처럼 줄 바꿈 하여 가장 많이 사용함
+
+      ```javascript
+      fun = function({
+          name,
+          age,
+          color,
+          status = '이상 없음'
+      }) {
+      	return `${name} : ${age} : ${color} : ${status}`
+      }
+      ```
+
+* 객체 속성 일괄 추출
+
+  ```javascript
+  const test = function(object) {
+  	const { name, age, color, status } = { status: '이상 없음', ...object }
+  	return `${name} : ${age} : ${color} : ${status}`
+  }
+  console.log(test({
+      name: '구름',
+      age: '7',
+      color: '갈색'
+  }))
+  ```
+
+  * 이렇게 사용하면 object.name 식으로 사용하지 않아도 됨(많이 사용함, nodejs 에서 특히 많이 사용)
+
+### 라이브 서버
+
+* 변경 사항을 바로 확인 가능
+
+* 설치
+
+  * vscode 의 왼쪽 확장 클릭 -> live server 검색 -> 설치 -> vscode 다시 시작
+
+* 사용
+
+  * 왼쪽 위 파일의 폴더 열기 클릭 -> 폴더 선택 클릭 -> 코드 작성 후
+
+    -> 오른쪽 밑 Go Live 클릭 or `Alt`+`L` + `Alt`+`o`
+
+    -> 오른쪽 밑에 버튼 다시 눌러서 종료
+
+### DOMContentLoaded 이벤트
+
+* DOM(Document Object Model)
+  * 문서 객체 모델
+    * HTML 요소를 조작하는 객체들의 집합
+
+* head 부분에서 문서 객체를 조작 가능하게 하는 기능
+* document.querySelector()
+  * 여러가지 선택자를 읽어 들여서 조작 가능
+  * 처음에 선택된 하나만 적용(여러개의 같은 이름이 있어도 처음것만 적용됨)
+* document.querySelectorAll()
+  * 같은 이름 여러개 한번에 적용 가능(보통 for문과 같이 사용)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 태그 선택자
+      document.querySelector('h1').style.color='red'
+      // 아이디 선택자
+      document.querySelector('#header').style.backgroundColor = 'orange'
+      // 클래스 선택자
+      document.querySelector('.center.head').style.textAlign = 'center'
+      // 속성 선택자
+      document.querySelector('[type=text]').style.borderRadius = '10px'
+      // 후손 선택자
+      document.querySelector('body input').style.backgroundColor = 'blue'
+      // querySelectorAll()
+      for(const element of document.querySelectorAll('input')){
+        element.style.backgroundColor = 'red'
+      }
+    })
+  </script>
+</head>
+<body>
+  <h1 id="header" class="center head">안녕하세요</h1>
+  <input type="text">
+  <input>
+</body>
+</html>
+```
+
+* 문서 객체 조작
+
+  * 글자 조작
+    * querySelector로 읽어 들여서 값을 넣어주거나 추출 가능
+      * textContent
+        * 텍스트 형식으로 추출이나 변경
+        * \<br> 을 사용하면 텍스트로 인식
+      * innerHTML
+        * \<br> 을 줄바꿈으로 인식
+        * 보안 문제로 많이는 사용 안함
+  * 속성 조작
+    * const img = document.querySelector('img')
+    * 표준 속성은 img.src = 'http://placekitten.com/200/200' 이런식으로 사용 가능
+    * 표준 속성이 아닌값은
+      * img.setAttribute('src','http://placekitten.com/200/200')
+      * img.getAttribute('src')
+
+  * 스타일 조작

@@ -1,22 +1,7 @@
 <script>
-  let output = ''
-  for (let i = 0; i < 9; i++) {
-    if (i < 5) {
-      for (let k = 0; k < 4 - i; k++) {
-        output += ' '
-      }
-      for (let j = 0; j < i*2+1; j++) {
-        output += '*'
-      }
-    } else{
-      for (let k = 0; k < i - 4; k++) {
-        output += ' '
-      }
-      for (let j = 0; j < (9-i)*2-1 ; j++) {
-        output += '*'
-      }
-    }
-    output += '\n'
-  }
-  console.log(output)
+  const a = prompt().split(' ')
+  const A = Number(a[0])
+  const B = Number(a[1])
+  const C = Number(a[2])
+  console.log(`${(A+B)%C}\n${((A%C) + (B%C))%C}\n${(A*B)%C}\n${((A%C) * (B%C))%C}`)
 </script>
