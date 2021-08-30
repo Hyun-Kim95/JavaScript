@@ -840,6 +840,7 @@ console.log(test{
       * innerHTML
         * \<br> 을 줄바꿈으로 인식
         * 보안 문제로 많이는 사용 안함
+    
   * 속성 조작
     * const img = document.querySelector('img')
     * 표준 속성은 img.src = 'http://placekitten.com/200/200' 이런식으로 사용 가능
@@ -848,3 +849,105 @@ console.log(test{
       * img.getAttribute('src')
 
   * 스타일 조작
+
+    ```javascript
+    const divs = document.querySelectorAll('div')
+    div.forEach((div,key) => {
+        div.style.backgroundColor = `rgb(${key*25}, ${key*25}, ${key*25})`
+        div.style.height = '10px'
+    })
+    ```
+
+### 문서 객체
+
+* 생성
+
+  * 밑에 순서대로 생성 가능
+
+    ```javascript
+    const header = document.createElement('h1')
+    header.textContent = 'createElement로 만든 태그'
+    header.style.color = 'red'
+    // 위 코드는 만들어 주기만 하는 코드, 밑에서 적용시킴
+    const body = document.querySelector('body')
+    body.appendChild(header) // body 태그에 해더를 붙힘
+    ```
+
+* 제거
+
+  * 위 코드 마지막에 body.removeChild(header)
+  * header.parentNode.removeChild(header)
+    * 위 코드보다는 이 코드를 더 많이 사용함
+
+* 이동
+
+  * appendChild( ) 이용
+
+### 타이머 관련 테크닉
+
+* 첫 번째 테크닉
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+      const header = document.createElement('h2')
+      header.textContent = '안녕하세요'
+
+      const first = document.querySelector('.first')
+      const second = document.querySelector('.second')
+      first.appendChild(header)
+      
+      const toFirst = () => {
+        first.appendChild(header)
+        setTimeout(toSecond,1000)
+      }
+      const toSecond = () => {
+        second.appendChild(header)
+        setTimeout(toFirst,1000)
+      }
+      toFirst()	// 여기서 스타트를 끊고 1초마다 header가 first 클래스와 second 클래스를 이동
+})
+```
+
+* 두 번째 테크닉
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+      const header = document.createElement('h2')
+      header.textContent = '안녕하세요'
+
+      const array = [
+        document.querySelector('.first'),
+        document.querySelector('.second')
+      ]
+      let 카운터 = 0
+      const fun = () => {
+        array[카운터%2].appendChild(header)
+        카운터++
+      }
+      fun()			// 일단 한번 실행해 줘야 위 코드처럼 처음에 first클래스에 붙어서 시작함
+      setInterval(fun,1000)	// 바로 윗줄 없으면 1초 뒤부터 붙어서 이동 시작
+})
+```
+
+* 응용
+
+  ```javascript
+  document.addEventListener('DOMContentLoaded', () => {
+        const header = document.createElement('h2')
+        header.textContent = '안녕하세요'
+  
+        const array = [
+          document.querySelector('.first'),
+          document.querySelector('.second')
+        ]
+        let 카운터 = 0
+        const fun = () => {
+          array[카운터%2].appendChild(header)
+          카운터++
+          setTimeout(fun,1000)	// 이걸 여기다 넣어도 같은 기능
+        }
+        fun()
+  })
+  ```
+
+  
