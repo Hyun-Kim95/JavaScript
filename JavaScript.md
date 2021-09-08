@@ -950,4 +950,164 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   ```
 
+### 문서 객체 이벤트 기본
+
+* document.on으로 시작하는 것들
+
+* 이벤트 연결
+
+  * connectButton.addEventListener('click', () => {
+
+       header.addEventListener('click', listener)
+
+      })
+
+* 이벤트 해제
+
+  * disconnectButton.addEventListener('click', () => {
+
+       header.removeEventListener('click', listener)
+
+      })
+
+* 예제
+
+  ```html
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let counter = 0										// 클릭 횟수 체크
+      const listener = () => {
+        header.textContent = `클릭 횟수: ${++counter}`  	// 클릭 횟수 출력
+      }
+  
+      const header = document.createElement('h1')			// h1 태그 생성
+      header.style.userSelect = 'none'					// h1 태그 선택시 효과없음
+      header.textContent = `클릭 횟수: 0`					// h1 태그 초기 출력문자
+  
+      const p = document.createElement('p')				// p태그 생성
+      p.style.userSelect = 'none'							// p태그 선택시 효과 없음
+      p.textContent = `이벤트 연결 상태: 해제`					// p 태그 초기 문자
+  
+      const connectButton = document.createElement('button')	// button 태그 생성
+      connectButton.textContent = '이벤트 연결 버튼'				// button 이름
+      connectButton.addEventListener('click', () => {			// button 클릭시
+        header.addEventListener('click', listener)			// listener 실행
+        p.textContent = '이벤트 연결 상태: 연결'				// p 태그 문자 변경
+      })
+  
+      const disconnectButton = document.createElement('button')	// button 태그 생성
+      disconnectButton.textContent = '이벤트 해제 버튼'				// button 이름
+      disconnectButton.addEventListener('click', () => {			// button 클릭시
+        header.removeEventListener('click', listener)	// 클릭시 listener에 연결된 이벤트해제
+        p.textContent = '이벤트 연결 상태: 해제'			// p 태그 문자 변경
+      })
+  
+      document.body.appendChild(header)			// 각 태그들을 순서에 맞게 body에 붙힘
+      document.body.appendChild(connectButton)
+      document.body.appendChild(disconnectButton)
+      document.body.appendChild(p)
+    </script>
+  </body>
+  </html>
+  ```
+
+### 키보드 이벤트
+
+* keyup, keydown, keypress 가 있음
+  * keypress는 아시아계 문자에는 잘 안될 때가 많아서 잘 사용 안함
+* document.addEventListener('keydown' , (event) => { }
+  * 키를 누르는 이벤트
+  * event에는 누른 키에 대한 정보가 들어감
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const h1 = document.querySelector('h1')				// h1 태그 연결
+      const textarea = document.querySelector('textarea')	// textarea 태그 연결
+      textarea.addEventListener('keyup',()=>{				// textarea에 keyup 이벤트 발생
+        h1.textContent = `글자 수: ${textarea.value.length}`	// 글자 수를 h1에 입력
+      })
+    })
+  </script>
+</head>
+<body>
+  <h1>글자 수: 0</h1>
+  <textarea></textarea>
+</body>
+</html>
+```
+
+### 이벤트 발생 객체
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const h1 = document.querySelector('h1')
+      const textarea = document.querySelector('textarea')
+      
+      // 이벤트 발생 객체를 의미하는 세가지(많이 사용함)
+      // textarea = 이벤트 발생 객체
+      textarea.addEventListener('keyup',()=>{
+        h1.textContent = `글자 수: ${textarea.value.length}`
+      })
+      // event.currentTarget = textarea = 이벤트 발생 객체	// 굳이 고르자면 얘를 기억해두면 좋음
+      textarea.addEventListener('keyup',(event)=>{
+        h1.textContent = `글자 수: ${event.currentTarget.value.length}`
+      })
+      // this = textarea = 이벤트 발생 객체, 화살표 함수 대신 function() 사용
+      textarea.addEventListener('keyup',function(){
+        h1.textContent = `글자 수: ${this.value.length}`
+      })
+        
+    })
+  </script>
+</head>
+<body>
+  <h1>글자 수: 0</h1>
+  <textarea></textarea>
+</body>
+</html>
+```
+
+### 기본 이벤트 막기
+
+* preventDefault()
+
+  ```html
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      document.addEventListener('DOMContentLoaded',()=>{
+        const a = document.querySelector('a')			// a태그 연결
+        a.addEventListener('click',(event)=>{			// 클릭 이벤트 발생시
+          event.preventDefault()						// 기본 이벤트 막음
+        })
+        a.addEventListener('contextmenu',(event)=>{	// 우클릭 이벤트 발생시
+          event.preventDefault()						// 기본 이벤트 막음
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <a href="https://www.naver.com">링크</a>
+  </body>
+  </html>
+  ```
+
   
