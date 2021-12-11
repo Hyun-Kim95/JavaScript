@@ -490,7 +490,7 @@ console.log(isLeapYear())	// 매개변수를 안주면 올해가 윤년인지 �
   ```javascript
   const 배열 = [273,52,103,32,57]
   배열.forEach(function(value,index,array){
-      consol.log(value,index,array)
+      console.log(value,index,array)
   })
   // 배열의 값이 하나씩 함수로 들어감(array는 생략 가능(잘 안씀))
   ```
@@ -512,7 +512,7 @@ console.log(isLeapYear())	// 매개변수를 안주면 올해가 윤년인지 �
   배열 = 배열.map(function (value,index){	// 새로운 배열을 만듬
       return value + "!!"	
   })
-  console.log(배열)
+  console.log(배열)//[52, 32]
   ```
 
 
@@ -1110,4 +1110,73 @@ document.addEventListener('DOMContentLoaded', () => {
   </html>
   ```
 
-  
+### 입력양식
+
+* 버튼
+
+  * \<button>글자</button>, <input type="button" value="글자">
+
+    * click 이벤트
+
+  * \<form action="">
+
+    ​	<input type="text" name="email">
+
+    ​	<input type="submit" value="글자">
+    </form>
+
+    * submit 이벤트
+      * form 태그 내부에서 사용
+      * 내부에 button태그가 있어도 submit으로 작용함
+        * input의 타입 button으로 사용해야 함
+
+  * ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+          // click 이벤트
+          const buttonA = document.querySelector('button')
+          const buttonB = document.querySelector('input[type=button]')
+          buttonA.addEventListener('click', (event) => {
+            event.currentTarget.textContent += '글자'
+          })
+          buttonB.addEventListener('click', (event) => {
+            event.currentTarget.value += '글자'
+          })
+          // submit 이벤트
+          const form = document.querySelector('form')
+          form.addEventListener('submit', (event) => {
+            const text = document.querySelector('input[type = text]')
+            if (text.value.indexOf('@') >= 0){
+              alert('정상적으로 제출합니다.!')
+            }else{
+              alert('이메일 형식을 입력해주세요!')
+              // 정보전달이 일어나지 않도록
+              event.preventDefault()
+            }
+          })
+        })
+      </script>
+    </head>
+    <body>
+      <!-- click 이벤트! -->
+      <button>글자</button>
+      <input type="button" value="글자">
+      <form action="">
+        <input type="text" name="email" id="">
+        <input type="submit" value="글자">
+      </form>
+    </body>
+    </html>
+    ```
+
+* 글자 입력
+
+* 선택
+
+* 체크박스
+
+* 라디오버튼
