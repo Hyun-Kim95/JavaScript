@@ -1114,6 +1114,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 * 버튼
 
+  * 예제: buttonEvent.html
+
   * \<button>글자</button>, <input type="button" value="글자">
 
     * click 이벤트
@@ -1131,8 +1133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         * input의 타입 button으로 사용해야 함
 
   * ```html
-    <!DOCTYPE html>
-    <html lang="en">
     <head>
       <meta charset="UTF-8">
       <script>
@@ -1170,13 +1170,84 @@ document.addEventListener('DOMContentLoaded', () => {
         <input type="submit" value="글자">
       </form>
     </body>
-    </html>
     ```
 
 * 글자 입력
 
-* 선택
+  * 예제: text.html
+  * value 속성 이용, change keydown keyup keypress 등의 이벤트 사용
+    * <input type="text" name="" >
+    * \<textarea name="" cols="30" reows="10"></textarea>
+  * \<p contenteditable="true">ooo</p>
+    * 글자 변경 가능하게 하는 속성
+  * 텍스트의 내부에 값을 입력하면 바로적용하도록 하려면 keyup 이벤트를 활용
+    * keydown, keypress는 입력하기 전까지 적용됨
+  * change 이벤트는 글자를 입력하고 엔터를 치거나 마우스로 적는 칸을 벗어나면 실행됨
+
+* 선택박스
+
+  * 예제: selectBox.html, select2.html
+
+  * \<select>
+
+    ​	\<option>ooo</option>
+
+    </select>
+
+  * 다중선택
+
+    * \<select multiple>
+
+  * ```html
+    <head>
+      <meta charset="UTF-8">
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const select = document.querySelector('select')
+          const p = document.querySelector('p')
+    
+          select.addEventListener('change', (event) => {
+            const options = event.currentTarget.options
+            const list = []
+            for(const option of options){
+              if(option.selected){
+                list.push(option.textContent)
+              }
+            }
+            p.textContent = `선택 : ${list.join(',')}`
+          })
+        })
+      </script>
+    </head>
+    <body>
+      <select multiple>
+        <option value="">떡볶이</option>
+        <option value="">순대</option>
+        <option value="">오뎅</option>
+        <option value="">튀김</option>
+      </select>
+      <p>선택 :</p>
+    </body>
+    ```
+
+  * 
 
 * 체크박스
 
+  * 예제 : checkBoxAndRadio.html
+  * 어떤 대상의 true 또는 false
+  * \<input type="checkbox" name="">
+
 * 라디오버튼
+
+  * 여러 대상 중에 하나를 선택, name속성을 지정해서 사용
+
+    ```
+    <input type="radio" name="gender">여성</br>
+    <input type="radio" name="gender">남성</br>
+    <input type="radio" name="gender">직접 지정</br>
+    ```
+
+* 할일 목록 예제
+
+  * todaywork.html
