@@ -1230,8 +1230,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </body>
     ```
 
-  * 
-
 * 체크박스
 
   * 예제 : checkBoxAndRadio.html
@@ -1248,6 +1246,95 @@ document.addEventListener('DOMContentLoaded', () => {
     <input type="radio" name="gender">직접 지정</br>
     ```
 
-* 할일 목록 예제
+* 할일 목록 예제(복습용)
 
   * todaywork.html
+
+### localStorage 객체
+
+* 예제 : localStorage
+
+> 저장되면 페이지 새로고침 시에도 기록이 남아있음
+>
+> 개발자도구(F12)의 Application 탭의 Storage의 Local Storage를 보면 저장되는 것을 확인 가능함
+
+* localStorage.getItem('키')
+* localStorage.setItem('키', '값')
+* localStorage.removeItem('키')
+* localStorage.clear()
+  * 전체 제거
+
+### JSON
+
+* localStorage_json
+
+> JavaScript Object Notation
+
+* 규정
+  * 키는 문자열만
+  * 문자열은 반드시 큰 따옴표!
+
+* JSON 객체
+  * JSON.stringify() : 자바스크립트 객체 -> JSON 문자열
+  * JSON.parse() : JSON 문자열 -> 자바스크립트 객체
+
+### 구문 오류와 예외
+
+* 프로그램 실행 전에 발생하는 오류
+  * SyntaxError(구문 오류)
+  * 괄호나 따옴표를 잘 닫았나 확인해야 함
+  * ex) console.log("hello"
+* 프로그램 실행 중에 발생하는 오류
+  * 런타임 오류 === 예외(exception)
+    * SyntaxError를 제외한 모든 것
+  * ex) console.rog("hello")
+
+### 예외 처리
+
+* 기본 예외 처리
+
+  * if
+
+* 고급 예외 처리
+
+  * try catch
+
+  * ```javascript
+    try{
+    	h1.textContent = '변경'
+    } catch (error){
+    	console.log('오류가 발생했습니다!')
+        console.log(error)
+    }
+    ```
+
+    * error 객체의 정보를 알 수 있음
+      * error.name, error.message
+
+  * finally
+
+    * try 부분에 return 이 있어도 무조건 실행됨
+
+  * try문의 javascript 에서 사용 예
+
+    * 다른 사람이 강제로 발생 시킨 예외를 처리하는 경우
+    * 없는 속성에 접근해서 활용하는 경우
+
+  * throw
+
+    * 강제로 오류 발생시킴
+
+    * ```javascript
+      if(r<0){
+          throw '길이는 음수가 될 수 없습니다.'
+      }
+      ```
+
+    * 프로그램이 중간에 종료됨
+
+    * 이런 throw 에서 프로그램을 정상적으로 종료 시키기 위해 try catch문 사용
+
+  * 예외 처리의 힘든 점
+
+    * 이걸 하는 노동(돈, 시간) 과 이걸 안 해서 발생하는 위험성의 균형을 잡는 것
+
