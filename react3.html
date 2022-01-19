@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor (props) {
+        super(props)
+        // 리엑트에서 사용하려면 그냥 이렇게 써야함
+        this.이벤트핸들러 = this.이벤트핸들러.bind(this)
+        this.state = {
+          숫자: 0
+        }
+      }
+      render () {
+        return <h1 onClick={this.이벤트핸들러}>{this.state.숫자}번 클릭했습니다!</h1>
+      }
+      이벤트핸들러 (event) {
+        this.setState ({
+          숫자: this.state.숫자 + 1
+        })
+      }
+    }
+    const 컴포넌트 = <App />
+    const 컨테이너 = document.querySelector('#root')
+    ReactDOM.render(컴포넌트, 컨테이너)
+  </script>
+</body>
+</html>

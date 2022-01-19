@@ -1,0 +1,33 @@
+<script>
+  //정사각형을 나타내는 객체
+  class Square {
+    // private 속성 : 클래스 내부에서만 접근 가능한 속성(클래스를 더 안전하게!)
+    #length
+
+    constructor (length) {
+      if (length < 0) { throw '길이는 0 이상이어야 합니다.'}
+      this.#length = length
+    }
+    get area () {
+      return this.#length * this.#length
+    }
+    get perimeter () {
+      return this.#length * 4
+    }
+    set length (length) {
+      if (length < 0) { throw '길이는 0 이상이어야 합니다.'}
+      this.#length = length
+    }
+    get length () {
+      return this.#length
+    }
+  }
+
+  const square = new Square(10)
+  console.log(square.area)
+  console.log(square.perimeter)
+
+  console.log(square.length)
+  square.length = 20
+  console.log(square.length)
+</script>

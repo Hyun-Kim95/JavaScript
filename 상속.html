@@ -1,0 +1,27 @@
+<script>
+  // 부모 클래스 + 슈퍼 클래스
+  class Rectangle {
+    constructor (width, height) {
+      this.width = width
+      this.height = height
+    }
+    getArea () { return this.width * this.height }
+    getPerimeter () { return 2 * (this.width + this.height) }
+  }
+  // 자식 클래스 + 서브 클래스
+  class Square extends Rectangle {
+    constructor (width) {
+      super(width, width) // 밑에 두개 적지 않고 이렇게 바로 넣어줘도 됨
+      // this.width = width
+      // this.height = width
+    }
+  }
+
+  const rect = new Rectangle(20, 10)
+  console.log(`넓이 : ${rect.getArea()}`)
+  console.log(`둘레 : ${rect.getPerimeter()}`)
+
+  const square = new Square(10)
+  console.log(`넓이 : ${square.getArea()}`)
+  console.log(`둘레 : ${square.getPerimeter()}`)
+</script>

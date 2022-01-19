@@ -1338,3 +1338,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
     * 이걸 하는 노동(돈, 시간) 과 이걸 안 해서 발생하는 위험성의 균형을 잡는 것
 
+### 객체 매개변수
+
+* 객체매개변수.html
+* 코드를 쉽게 읽을 수 있도록 함
+
+### 클래스
+
+* Class.html
+  * 객체 매개변수도 적용시켜 놓음
+* 객체를 쉽게 생성할 수 있도록 도와주는 문법
+
+* 클래스 이름은 첫글자를 대문자로 작성
+* const 인스턴스 = new 클래스이름()
+  * 이렇게 만들어진 객체를 인스턴스 라고 함
+
+### private 속성
+
+* private.html
+  * #xxx
+    * 이렇게 하면 내부에서만 접근 가능하게 돼서 클래스를 더 안전하게 해줌
+    * 변수, 함수 모두 적용 가능
+* 접근하려면 게터, 세터를 이용함
+  * set length (length) { }, get length () { }
+  * 함수도 이런식으로 만들 수 있음
+    * get area () { }, get perimeter () { }
+
+* 밖에서 접근하는 방식
+  * square.length, square.lenth=20, square.area 등으로 접근 가능
+  * 그냥 length에 접근하면 get length에 접근하게 됨
+  * square.length = 20 과 같이 접근하면 set length에 접근하게 됨
+
+### static 속성과 메서드
+
+* ```javascript
+  // 만들어진 Square 객체의 개수를 알고 싶을 때
+  class Square {
+      static count = 0
+  	static test () { }
+  
+  	constructor (length) {
+          Square.count += 1
+      }
+  }
+  
+  console.log(Square.count)
+  new Square()
+  new Square()
+  new Square()
+  console.log(Square.count)
+  ```
+
+* Square.count 로 선언해서 해도 됨
+
+  * 클래스보다 밑에 선언해야 함
+
+* 클래스 안쪽에 선언하고 싶어서 나온 문법임
+
+### 상속 기본 문법
+
+* 상속.html
+
+* ```javascript
+  class Square extends Rectangle { 
+  	constructor (width) {
+  		super()
+  		this.width = width
+  		this.height = width
+  	}
+  }
+  ```
+
+* 주는 클래스 : 부모 클래스 or 슈퍼 클래스
+* 받는 클래스 : 자식 클래스 or 서브 클래스
+
+### 리액트 기본
+
+* react.html
+
+* head 부분에 아래 코드 넣어주고 사용함
+
+  * ```html
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    ```
+
+* 바벨 프로그램
+  * 자바스크립트 -> 웹 브라우저에서 사용 가능!!
+  * 자바스크립트 내부에서 태크를 사용 가능 (JavaScript Extensioin(JSX) : 자바스크립트 확장 문법)
+  * 이미지 태그처럼 닫는 테그가 없으면 \<img /> 이런식으로 사용해야 함
+
+* 클래스를 만들어서 사용
+
+  * **react2.html**
+  * extends React.Component 사용해야함
+
+  * this.state = 화면에 출력할 값을 만들 때
+  * this.setState = 값을 변경하고 반영할 때
+  * componentDidMount = 화면에 컴포넌트가 추가될 때 사용
+  * componentWillUnMount = 화면에서 컴포넌트가 제거될 때 사용
+
+* 이벤트 적용
+  * **react3.html**
+  * constructor(props) { this.이벤트핸들러 = this.이벤트핸들러.bind(this) }
+    * 이렇게 해놔야 사용할 수 있음
+
